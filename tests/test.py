@@ -11,7 +11,7 @@ def main(args=sys.argv[1:], **kwargs):
         '--host',
         dest='host',
         default='http://localhost:3000',
-        help='set verbose logging')
+        help='set API Url')
     mainparser.add_argument(
         '-r', '--requests',
         dest='requests',

@@ -1,0 +1,18 @@
+version: '3'
+services:
+  test:
+    build: tests/
+    networks:
+       - overlay
+    depends_on:
+      - web
+  web:
+    build: .
+    image: "sleyva97/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+    networks:
+       - overlay
+    ports:
+     - "3000:3000"
+
+networks:
+  overlay:

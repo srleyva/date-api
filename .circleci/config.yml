@@ -1,0 +1,52 @@
+version: 2
+jobs:
+  unit:
+    docker:
+      - image: golang
+    working_directory: /go/src/github.com/srleyva/date-api
+    steps:
+      - checkout
+      - run : |
+          go test ./... -v
+  build-integration:
+    docker:
+      - image: ubuntu
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: build, run integrations test, publish
+          command: make docker-integration 
+  publish:
+    machine: true
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: publish docker container
+          command: make docker-push
+  deploy:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Deploy to kubenetes 
+          command: make kubernetes-deployment
+      - run:
+          name: Promote to active
+          command: make promote-deployment
+
+workflows:
+  version: 2
+  build-package-deploy:
+    jobs:
+      - unit
+      - build-integration:
+          requires:
+            - unit
+      - publish:
+          requires:
+            - build-integration
+      - deploy:
+          requires:
+            - publish

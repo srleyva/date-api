@@ -7,10 +7,17 @@
 
     all: docker-push kubernetes-deployment promote-deployment
 
-    docker-build:
-	docker build --build-arg VERSION=$(ACTIVE_VERSION) . -t $(DOCKER_IMAGE):$(ACTIVE_VERSION)
+    unit-test:
+	go test ./...
 
-    docker-push: docker-build
+    docker-integration:
+	docker-compose build --build-arg VERSION=$(ACTIVE_VERSION)
+	docker-compose up --exit-code-from test | grep test_1
+	docker-compose push --ignore-push-failures
+
+    docker-push:
+	docker pull $(DOCKER_IMAGE):$(shell git git rev-parse HEAD)
+	docker tag $(DOCKER_IMAGE):$(shell git git rev-parse HEAD) $(DOCKER_IMAGE):$(ACTIVE_VERSION)
 	docker push $(DOCKER_IMAGE):$(ACTIVE_VERSION)
 
     kubernetes-deployment:
