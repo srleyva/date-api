@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: date-api-blue
+  labels:
+    version: "1.0"
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        name: date-api-blue
+    spec:
+      containers: 
+        - name: date-api
+          image: sleyva97/date-api:1.0
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 3000
