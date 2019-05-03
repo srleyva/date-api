@@ -10,7 +10,7 @@ jobs:
           go test ./... -v
   build-integration:
     docker:
-      - image: ubuntu
+      - image: sleyva97/build-image
     steps:
       - checkout
       - setup_remote_docker
@@ -18,7 +18,8 @@ jobs:
           name: build, run integrations test, publish
           command: make docker-integration 
   publish:
-    machine: true
+    docker:
+      - image: sleyva97/build-image
     steps:
       - checkout
       - setup_remote_docker
@@ -26,7 +27,8 @@ jobs:
           name: publish docker container
           command: make docker-push
   deploy:
-    machine: true
+    docker:
+      - image: sleyva97/build-image
     steps:
       - checkout
       - run:

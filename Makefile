@@ -13,7 +13,7 @@
     docker-integration:
 	docker-compose build --build-arg VERSION=$(ACTIVE_VERSION)
 	docker-compose up --exit-code-from test | grep test_1
-	docker-compose push --ignore-push-failures
+	docker-compose push
 
     docker-push:
 	docker pull $(DOCKER_IMAGE):$(shell git git rev-parse HEAD)
