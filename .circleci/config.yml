@@ -27,8 +27,8 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Auth to EKS
-          command: aws eks --region us-east-2 update-kubeconfig --name blizzard-demo
+          name: Auth to ECR
+          command: eval $(aws ecr get-login --no-include-email --region us-east-2)
       - run:
           name: publish docker container
           command: make docker-push
