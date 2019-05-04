@@ -1,13 +1,18 @@
 apiVersion: v1
 kind: Service
-metadata: 
+metadata:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-east-2:020853624727:certificate/ce9c6ecf-9ef7-4b56-a67a-a84e4fcf2da8"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
   name: date-api
   labels: 
     name: date-api
 spec:
+  type: LoadBalancer
   ports:
-    - name: http
-      port: 80
+    - name: https
+      port: 443
       targetPort: http
   selector: 
     name: date-api-blue
