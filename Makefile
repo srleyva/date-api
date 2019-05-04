@@ -1,8 +1,8 @@
  # Go parameters
     BINARY=date-api
     ORG=020853624727.dkr.ecr.us-east-2.amazonaws.com
-    ACTIVE_VERSION=1.6
-    ROLLBACK_VERSION=1.5
+    ACTIVE_VERSION=1.7
+    ROLLBACK_VERSION=1.6
     DOCKER_IMAGE=$(ORG)/$(BINARY)
 
     all: docker-push kubernetes-deployment promote-deployment
