@@ -1,6 +1,6 @@
  # Go parameters
     BINARY=date-api
-    ORG=sleyva97
+    ORG=020853624727.dkr.ecr.us-east-2.amazonaws.com
     ACTIVE_VERSION=1.4
     ROLLBACK_VERSION=1.3
     DOCKER_IMAGE=$(ORG)/$(BINARY)
