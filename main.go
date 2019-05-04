@@ -29,6 +29,7 @@ func main() {
 		render.SetContentType(render.ContentTypeJSON),
 		logs.NewStructuredLogger(logger),
 		middleware.Recoverer,
+		middleware.SetHeader("application-version", VERSION),
 	)
 
 	router.Mount("/", date.Routes(logger).Router)

@@ -45,7 +45,10 @@ def main(args=sys.argv[1:], **kwargs):
                 failure = failure + 1
                 status = 'FAILURE'
 
-            logging.info(f'Request {request + 1}: {status} TTLB: {ttlb} MS')
+            application_version = r.headers.get('Application-Version')
+
+            logging.info(
+                f'{request + 1}: {status} TTLB:{ttlb}MS Version: {application_version}')
             total_ttlb = total_ttlb + ttlb
     except KeyboardInterrupt:
         total = count
