@@ -1,8 +1,8 @@
  # Go parameters
     BINARY=date-api
     ORG=020853624727.dkr.ecr.us-east-2.amazonaws.com
-    ACTIVE_VERSION=1.4
-    ROLLBACK_VERSION=1.3
+    ACTIVE_VERSION=1.1
+    ROLLBACK_VERSION=1.0
     DOCKER_IMAGE=$(ORG)/$(BINARY)
 
     all: docker-push kubernetes-deployment promote-deployment
@@ -25,7 +25,7 @@
 	kubectl -n date-api set image \
 	deployment/$(shell kubectl -n date-api get deployments -l "version != $(ROLLBACK_VERSION)" -o jsonpath={.items[0].metadata.name}) \
 	date-api=$(DOCKER_IMAGE):$(ACTIVE_VERSION)
-	
+
 	# Re-label oldest deployment and pods
 	kubectl -n date-api label deployment \
 	$(shell kubectl -n date-api get deployments -l "version != $(ROLLBACK_VERSION)" -o jsonpath={.items[0].metadata.name}) \

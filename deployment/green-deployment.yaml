@@ -11,9 +11,9 @@ spec:
       labels:
         name: date-api-green
     spec:
-      containers: 
+      containers:
         - name: date-api
-          image: sleyva97/date-api:1.1
+          image: 020853624727.dkr.ecr.us-east-2.amazonaws.com/date-api:1.1
           imagePullPolicy: Always
           ports:
             - name: http
