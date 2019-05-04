@@ -2,6 +2,8 @@ import requests
 import argparse
 import logging
 import sys
+import time
+
 
 def main(args=sys.argv[1:], **kwargs):
     '''Test the date api '''
@@ -23,27 +25,39 @@ def main(args=sys.argv[1:], **kwargs):
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s %(levelname)-6s %(message)s')
-    logging.info(f'Testing API {parser.host} with {parser.requests} number of requests')
+    logging.info(
+            f'Testing API {parser.host} with {parser.requests} requests')
 
     success = 0
     failure = 0
+    total = 0
+    total_ttlb = 0
 
-    for request in range(parser.requests):
-        r = requests.get(f'{parser.host}')
-        if r.status_code is 200:
-            success = success + 1
-            status = 'SUCCESS'
-        else:
-            failure = failure + 1
-            status = 'FAILURE'
+    try:
+        for count, request in enumerate(range(int(parser.requests))):
+            start = time.time()
+            r = requests.get(f'{parser.host}')
+            ttlb = round((time.time() - start) * 1000, 2)
+            if r.status_code is 200:
+                success = success + 1
+                status = 'SUCCESS'
+            else:
+                failure = failure + 1
+                status = 'FAILURE'
 
-        logging.info(f'Request {request + 1}: {status} TTLB: {r.elapsed}')
-    
-    logging.info(f'Success {success}/{parser.requests}')
-    logging.info(f'Failure {failure}/{parser.requests}')
+            logging.info(f'Request {request + 1}: {status} TTLB: {ttlb} MS')
+            total_ttlb = total_ttlb + ttlb
+    except KeyboardInterrupt:
+        total = count
+
+    logging.info('------------------results------------------')
+    logging.info(f'Success {success}/{total}')
+    logging.info(f'Failure {failure}/{total}')
+    logging.info(f'Average TTLB {round(total_ttlb/total, 2)}')
+
 
 if __name__ == "__main__":
     main()
 
-    
+
 
