@@ -44,6 +44,9 @@ jobs:
           name: Deploy to kubenetes 
           command: make kubernetes-deployment
       - run:
+          name: Wait for rollout to succeed
+          command: make rollout-wait
+      - run:
           name: Promote to active
           command: make promote-deployment
 

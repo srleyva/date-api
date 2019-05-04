@@ -8,4 +8,6 @@ RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/
   chmod +x ./aws-iam-authenticator && \
   mv aws-iam-authenticator /usr/local/bin
 
+ADD deployment_wait.sh /usr/local/bin/
+
 COPY --from=lachlanevenson/k8s-kubectl:v1.10.3 /usr/local/bin/kubectl /usr/local/bin/kubectl

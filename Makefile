@@ -35,5 +35,8 @@
 	$(shell kubectl -n date-api get pods -l "name == $(shell kubectl -n date-api get deployments -l "version != $(ROLLBACK_VERSION)" -o jsonpath={.items[0].metadata.name})" -o jsonpath={.items[0].metadata.name}) \
 	version=${ACTIVE_VERSION} --overwrite
 
+    rollout-wait:
+	deployment_wait.sh $(shell kubectl -n date-api get deployments -l "version != $(ROLLBACK_VERSION)" -o jsonpath={.items[0].metadata.name})
+
     promote-deployment:
 	kubectl set selector service date-api name=$(shell kubectl -n date-api get deployments -l "version != $(ROLLBACK_VERSION)" -o jsonpath={.items[0].metadata.name}) -n date-api
