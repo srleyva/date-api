@@ -21,7 +21,6 @@
 	docker push $(DOCKER_IMAGE):$(ACTIVE_VERSION)
 
     kubernetes-deployment:
-
 	# Change pods image and label
 	kubectl -n date-api set image \
 	deployment/$(shell kubectl -n date-api get deployments -l "version != $(ROLLBACK_VERSION)" -o jsonpath={.items[0].metadata.name}) \

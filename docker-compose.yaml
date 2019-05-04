@@ -8,7 +8,7 @@ services:
       - web
   web:
     build: .
-    image: "sleyva97/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+    image: "${DOCKER_REPO}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
     networks:
        - overlay
     ports:
