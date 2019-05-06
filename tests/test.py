@@ -53,6 +53,9 @@ def main(args=sys.argv[1:], **kwargs):
     except KeyboardInterrupt:
         total = count
 
+    if total is 0:
+        total = count + 1
+
     logging.info('------------------results------------------')
     logging.info(f'Success {success}/{total}')
     logging.info(f'Failure {failure}/{total}')
