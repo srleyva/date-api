@@ -5,8 +5,6 @@
     ROLLBACK_VERSION=1.8
     DOCKER_IMAGE=$(ORG)/$(BINARY)
 
-    all: docker-push kubernetes-deployment promote-deployment
-
     unit-test:
 	go test ./...
 
