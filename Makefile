@@ -1,9 +1,8 @@
  # Go parameters
     BINARY=date-api
-    ORG=020853624727.dkr.ecr.us-east-2.amazonaws.com
     ACTIVE_VERSION=1.10
     ROLLBACK_VERSION=1.9
-    DOCKER_IMAGE=$(ORG)/$(BINARY)
+    DOCKER_IMAGE=$(DOCKER_REPO)/$(BINARY)
 
     unit-test:
 	go test ./...

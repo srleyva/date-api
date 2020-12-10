@@ -48,7 +48,7 @@ jobs:
       - checkout
       - run:
           name: Auth to EKS
-          command: aws eks --region us-east-2 update-kubeconfig --name blizzard-demo
+          command: aws eks --region us-east-2 update-kubeconfig --name stephen-demo
       - run:
           name: Deploy to kubenetes 
           command: make kubernetes-deployment
