@@ -1,10 +1,13 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: date-api-blue
   labels:
     version: "1.0"
 spec:
+  selector:
+    matchLabels:
+      name: date-api-blue
   replicas: 3
   template:
     metadata:
@@ -13,7 +16,7 @@ spec:
     spec:
       containers:
         - name: date-api
-          image: 020853624727.dkr.ecr.us-east-2.amazonaws.com/date-api:1.0
+          image: 439000603071.dkr.ecr.us-east-2.amazonaws.com/date-api:1.0
           imagePullPolicy: Always
           ports:
             - name: http
