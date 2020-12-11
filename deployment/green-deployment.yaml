@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: date-api
-          image: 439000603071.dkr.ecr.us-east-2.amazonaws.com/date-api:latest
+          image: 439000603071.dkr.ecr.us-east-2.amazonaws.com/date-api:1.10
           imagePullPolicy: Always
           ports:
             - name: http
