@@ -38,7 +38,7 @@ I am operating on the assumption that a rollback is done in the case of a failur
 $ make rollback
 Are you sure you want to rollback deployment 1.7 to 1.6? [y/n]:y
 Rolling back 1.7 to 1.6
-kubectl set selector service date-api name=date-api-blue -n date-api
+kubectl set selector service date-api name=date-api-blue
 Rollback successful
 ```
 
