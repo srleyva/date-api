@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk add --update make git docker py-pip python-dev libffi-dev openssl-dev gcc libc-dev libgcc py-paramiko curl
+RUN apk add --update make git docker py-pip python3-dev libffi-dev openssl-dev gcc libc-dev libgcc py-paramiko curl
 
 RUN pip install docker-compose awscli
 
@@ -10,4 +10,4 @@ RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/
 
 ADD deployment_wait.sh /usr/local/bin/
 
-COPY --from=lachlanevenson/k8s-kubectl:v1.10.3 /usr/local/bin/kubectl /usr/local/bin/kubectl
+COPY --from=bitnami/kubectl /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl

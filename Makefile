@@ -1,7 +1,7 @@
  # Go parameters
     BINARY=date-api
-    ACTIVE_VERSION=1.12
-    ROLLBACK_VERSION=1.11
+    ACTIVE_VERSION=1.13
+    ROLLBACK_VERSION=1.12
     DOCKER_IMAGE=$(DOCKER_REPO)/$(BINARY)
 
     unit-test:
