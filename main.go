@@ -30,7 +30,6 @@ func main() {
 		logs.NewStructuredLogger(logger),
 		middleware.Recoverer,
 		middleware.SetHeader("application-version", VERSION),
-		middleware.SetHeader("hello", "world"),
 	)
 
 	router.Mount("/", date.Routes(logger).Router)

@@ -15,7 +15,7 @@ error() {
 attempts=0
 limit=10
 backoff=1
-status="kubectl rollout status deployment/$1 -n date-api"
+status="kubectl rollout status deployment/$1"
 
 until $status || [ $attempts -eq $limit ]; do
     $status
